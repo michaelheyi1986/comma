@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Comma Challenge</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        .sentence {
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Comma Challenge</h1>
+        <p>Click the button to pick a random sentence, and explain the fucntion of the comma(s).</p>
+        <button class="btn" id="pickButton" onclick="pickSentence()">Click here</button>
+        <div class="sentence" id="sentenceDisplay"></div>
+    </div>
+
+    <script>
+        const sentences = [
+            "5) When do we use can, could, may, or might?",
+            "17) For your entree, you may choose vegetarian pasta, beef, chicken, or salmon.",
+            "8) She buys bread, butter, vegetables, and many other things from this supermarket.",
+            "20) Dan's lifelong project is to be able to speak American English, French, German, and Mandarin Chinese.",
+            "18) Navigating through snow, sleet, wind, and darkness is a miserable way to travel.",
+            "25) The little girl likes to sing, to dance, and to act.",
+            "14) Julie loves ice cream, books, and kittens.",
+            "21) We were out of milk, so I went to the store.",
+            "9) He hit the ball well, but he ran toward third base.",
+            "24) The students completed their math test on Monday, and the teachers handed in the grades on Thursday.",
+            "27) Although Mike had spent several years in Antarctica, he still bundled up warmly in the brisk autumns of Ohio.",
+            "7) Because Jane had learned to study by herself, she was able to pass the entrance exam.",
+            "29) If you can’t see without your glasses, you shouldn’t be driving.",
+            "13) Though I don’t doubt his sincerity, I cannot agree with his position on that issue.",
+            "2) The Founders Bridge, which spans the Connecticut River, is falling down.",
+            "28) Last week's test, says my best friend, was the hardest ever.",
+            "22) Eleanor, his wife of thirty years, suddenly decided to open her own business.",
+            "11) My mother, Angela, is a wonderful cook.",
+            "6) Mary, unlike Anne, is very organized.",
+            "26) Posey’s Cafe, which Chester recommended, is a fantastic restaurant.",
+            "10) I will give the document to my brother, Tom.",
+            "16) Ailsa talks to Archer, new president of the college, about the organization's changing tides.",
+            "3) Wang Ling, who is the best singer of the class, will teach us to sing the song.",
+            "23) We sold 1,270 rare books last year; the most expensive sold for $ 5,255.50.",
+            "4) The store closed its doors for good on Wednesday, October 1958.",
+            "19) The company is headquartered in Sydney, New South Wales, Australia.",
+            "12) “We are living in a material world,” said the singer Madonna.",
+            "15) 1,850,400 signatures were collected nationwide in support of the protest.",
+            "1) Well, Mr. President, the challenge that you have is the data you have is wrong",
+            "30) He is a strong, healthy young man.",
+            "31) January 19, 2024, was a bad day for foreign investors.",
+            "32) I am majoring in digital media arts, for I hope to find a job doing video-game animation.",
+            "33) Two girls, tired and hungry, came into the camp.",
+            "34) Girls, who have red hair, are very attractive.",
+            "35) Please, Jack, come home as soon as you can."
+        ];
+
+        let usedSentences = new Set();
+
+        function pickSentence() {
+            if (usedSentences.size === sentences.length) {
+                document.getElementById('sentenceDisplay').textContent = "All sentences have been used.";
+                return;
+            }
+
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * sentences.length);
+            } while (usedSentences.has(randomIndex));
+
+            usedSentences.add(randomIndex);
+            document.getElementById('sentenceDisplay').textContent = sentences[randomIndex];
+
+            // Disable the button and set a 30-minute timer
+            const button = document.getElementById('pickButton');
+            button.disabled = true;
+            setTimeout(() => {
+                button.disabled = false;
+            }, 30 * 60 * 1000); // 30 minutes in milliseconds
+        }
+    </script>
+</body>
+</html>
